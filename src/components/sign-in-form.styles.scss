@@ -1,0 +1,12 @@
+.sign-in-form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-width: 40%;
+
+  .sign-in-form-title {
+    align-items: center;
+    justify-content: center;
+  }
+}
