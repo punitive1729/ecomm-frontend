@@ -1,0 +1,38 @@
+$sub-color: grey;
+$main-color: black;
+
+.form-input-container {
+  position: relative;
+  margin: 20px 0;
+
+  .form-input {
+    background: none;
+    background-color: white;
+    color: $main-color;
+    font-size: 18px;
+    padding: 10px 10px 10px 5px;
+    display: block;
+    width: 100%;
+    border: none;
+    border-radius: 0;
+    border-bottom: 1px solid $sub-color;
+  }
+
+  input[type='password'] {
+    letter-spacing: 0.3em;
+  }
+
+  .form-input-label {
+    color: $sub-color;
+    font-size: 16px;
+    font-weight: normal;
+    position: absolute;
+    pointer-events: none;
+    left: 5px;
+    top: 10px;
+
+    &.shrink {
+      display: none;
+    }
+  }
+}
