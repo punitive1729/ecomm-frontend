@@ -5,6 +5,7 @@ import {
 import FormInput from './form-input.component';
 import { useState } from 'react';
 import './sign-up-form.styles.scss';
+import Button from './button.component';
 
 const defaultFormField = {
   displayName: '',
@@ -20,7 +21,6 @@ const SignUp = () => {
   const handleSignUp = async (event) => {
     event.preventDefault();
     if (password !== confirmPassword) return;
-
     try {
       const { user } = await createUserFromEmailAndPasswordAuth(
         email,
@@ -82,9 +82,7 @@ const SignUp = () => {
           onChange={handleChange}
           name='confirmPassword'
         />
-        <button className='sign-up-button' type='submit'>
-          SIGN UP
-        </button>
+        <Button text='SIGN UP' type='submit' />
       </form>
     </div>
   );

@@ -1,12 +1,16 @@
 .sign-in-form-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-width: 40%;
+  min-width: 30%;
 
   .sign-in-form-title {
     align-items: center;
     justify-content: center;
+  }
+
+  .signIn-buttons {
+    margin-top: 15%;
+    display: flex;
+    justify-content: space-between;
   }
 }
