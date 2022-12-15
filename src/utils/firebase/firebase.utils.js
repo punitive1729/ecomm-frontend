@@ -3,7 +3,6 @@ import { firebaseApp } from './firebase-app';
 import {
   getAuth,
   createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
   signInWithPopup,
   GoogleAuthProvider,
 } from 'firebase/auth';
