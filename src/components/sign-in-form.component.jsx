@@ -1,22 +1,40 @@
 import {
   signInWithGooglePopup,
+  signInAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
 } from './../utils/firebase/firebase.utils';
 import './sign-in-form.styles.scss';
 import { useState } from 'react';
 import FormInput from './form-input.component';
-const defaultSignInForm = {
+import Button from './button.component';
+
+const defaultFormFields = {
   email: '',
   password: '',
 };
 
 const SignIn = () => {
-  const [formFields, setFormFields] = useState(defaultSignInForm);
+  const [formFields, setFormFields] = useState(defaultFormFields);
   const { password, email } = formFields;
 
   const logGoogleUser = async () => {
     const { user } = await signInWithGooglePopup();
     console.log('Result\n', await createUserDocumentFromAuth(user));
+  };
+
+  const handleSignIn = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await signInAuthUserWithEmailAndPassword(
+        email,
+        password
+      );
+      console.log('LoggedIn\n', response);
+    } catch (error) {
+      console.log('Error in signing-in user..', error);
+      throw error;
+    }
+    setFormFields(defaultFormFields);
   };
 
   const handleChange = (event) => {
@@ -29,8 +47,9 @@ const SignIn = () => {
 
   return (
     <div className='sign-in-form-container'>
-      <h1 className='sign-in-form-title'>SIGN IN</h1>
-      <form onSubmit={() => {}} className='sign-in-form'>
+      <h2 className='sign-in-form-title'>Already Have Account?</h2>
+      <span>Sign In</span>
+      <form onSubmit={handleSignIn} className='sign-in-form'>
         <FormInput
           labelName='Email'
           type='email'
@@ -39,22 +58,24 @@ const SignIn = () => {
           onChange={handleChange}
           name='email'
         />
-
         <FormInput
           labelName='Password'
-          type='password'
           required
+          type='password'
           value={password}
           onChange={handleChange}
           name='password'
         />
-        <button className='sign-in-button' type='submit'>
-          SIGN IN
-        </button>
+        <div className='signIn-buttons'>
+          <Button text='SIGN IN' type='submit' />
+          <Button
+            type='button'
+            text='GOOGLE'
+            onClick={logGoogleUser}
+            buttonType='google'
+          />
+        </div>
       </form>
-      <button onClick={logGoogleUser} className='google-sign-in'>
-        GOOGLE SIGN IN
-      </button>
     </div>
   );
 };
