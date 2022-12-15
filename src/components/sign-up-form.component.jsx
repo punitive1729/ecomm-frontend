@@ -19,7 +19,7 @@ const SignUp = () => {
 
   const handleSignUp = async (event) => {
     event.preventDefault();
-    if (password != confirmPassword) return;
+    if (password !== confirmPassword) return;
 
     try {
       const { user } = await createUserFromEmailAndPasswordAuth(
