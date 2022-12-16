@@ -7,12 +7,12 @@ import {
   signOut,
   signInWithEmailAndPassword,
   GoogleAuthProvider,
+  onAuthStateChanged,
 } from 'firebase/auth';
 
 import { getFirestore, getDoc, setDoc, doc } from 'firebase/firestore';
 
 // Initialize the app
-
 const googleProvider = new GoogleAuthProvider();
 
 // Prompt the user to select some Gmail account
@@ -56,3 +56,6 @@ export const signInAuthUserWithEmailAndPassword = async (email, password) => {
 };
 
 export const signOutUser = async () => await signOut(auth);
+
+export const authStateChangeListener = async (callback) =>
+  onAuthStateChanged(auth, callback);

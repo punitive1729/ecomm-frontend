@@ -1,6 +1,6 @@
 # Learning Various Concepts of React
 
-The project is aimed to Learn React
+The project is aimed to Apply Concepts of React to make Ecomm-Frontend
 
 # Getting Started with Create React App
 
