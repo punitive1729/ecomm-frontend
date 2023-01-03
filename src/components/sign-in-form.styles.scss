@@ -7,11 +7,9 @@
     align-items: center;
     justify-content: center;
   }
+}
 
-  .signIn-buttons {
-    margin-top: 10%;
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-  }
+.signIn-buttons {
+  display: flex;
+  flex-wrap: wrap;
 }
