@@ -2,11 +2,8 @@ import Home from './routes/home/home.component';
 import { Routes, Route } from 'react-router-dom';
 import Navigation from './routes/navigation/navigation.component';
 import Auth from './routes/auth/auth.component';
-
-const Shop = () => {
-  return <h1>Shop component</h1>;
-};
-
+import Shop from './routes/shop/shop.component';
+import Cart from './routes/cart/cart.component';
 const App = () => {
   return (
     <Routes>
@@ -14,6 +11,7 @@ const App = () => {
         <Route path='/' element={<Home />} />
         <Route path='/shop' element={<Shop />} />
         <Route path='/auth' element={<Auth />} />
+        <Route path='/cart' element={<Cart />} />
       </Route>
     </Routes>
   );

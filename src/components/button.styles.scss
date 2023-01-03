@@ -7,11 +7,10 @@
   letter-spacing: 1px;
   font-size: 17px;
   color: white;
-  width: 165px;
+  width: 40%;
   height: 50px;
   font-weight: bold;
   cursor: pointer;
-
   margin: 0 auto;
 
   &:hover {
@@ -31,6 +30,7 @@
   }
 
   &.inverted {
+    width: 80%;
     background-color: white;
     color: black;
     border: 2px solid black;
