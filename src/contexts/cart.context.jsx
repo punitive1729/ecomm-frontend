@@ -1,6 +1,6 @@
 import { createContext, useState } from 'react';
 
-const updateCartItems = (cartItems, productToAdd) => {
+const addCartItem = (cartItems, productToAdd) => {
   let flag = 0;
   console.log('adding Product: ', productToAdd);
   const newCartItems = cartItems.map((cartItem) => {
@@ -16,10 +16,33 @@ const updateCartItems = (cartItems, productToAdd) => {
   return newCartItems;
 };
 
+const removeCartItem = (cartItems, cartItemToRemove) => {
+  return cartItems.filter((cartItem) => {
+    if (cartItem.id === cartItemToRemove.id) {
+      if (cartItem.quantity > 1) {
+        cartItem.quantity = cartItem.quantity - 1;
+        return cartItem;
+      }
+    } else return cartItem;
+  });
+};
+
+const removeProduct = (cartItems, cartItemToRemove, price) => {
+  return cartItems.filter((cartItem) => {
+    if (cartItem.id === cartItemToRemove.id) {
+      price.totalPrice = price.totalPrice - cartItem.quantity * cartItem.price;
+    } else return cartItem;
+  });
+};
+
 export const CartDropDownContext = createContext({
   cartStatus: false,
   cartItems: [],
   totalCartItems: 0,
+  totalPrice: 0,
+  setTotalPrice: () => {},
+  removeItemFromCart: () => {},
+  removeOneProduct: () => {},
   setTotalCartItems: () => {},
   addItemToCart: () => {},
   setCartStatus: () => {},
@@ -29,18 +52,37 @@ export const CartDropDownContextProvider = ({ children }) => {
   const [cartStatus, setCartStatus] = useState(false);
   const [cartItems, setCartItems] = useState([]);
   const [totalCartItems, setTotalCartItems] = useState(0);
+  const [totalPrice, setTotalPrice] = useState(0);
+  const price = { totalPrice };
+
+  const removeOneProduct = (cartItem) => {
+    setCartItems(removeProduct(cartItems, cartItem, price));
+    setTotalPrice(price.totalPrice);
+    setTotalCartItems(totalCartItems - cartItem.quantity);
+  };
+
+  const removeItemFromCart = (cartItemToRemove) => {
+    setCartItems(removeCartItem(cartItems, cartItemToRemove));
+    setTotalPrice(totalPrice - cartItemToRemove.price);
+    setTotalCartItems(totalCartItems - 1);
+  };
 
   const addItemToCart = (productToAdd) => {
-    setCartItems(updateCartItems(cartItems, productToAdd));
+    setCartItems(addCartItem(cartItems, productToAdd, price));
+    setTotalPrice(totalPrice + productToAdd.price);
+    setTotalCartItems(totalCartItems + 1);
   };
 
   const value = {
     cartStatus,
+    removeOneProduct,
     setCartStatus,
     cartItems,
     addItemToCart,
     totalCartItems,
     setTotalCartItems,
+    removeItemFromCart,
+    totalPrice,
   };
 
   return (
