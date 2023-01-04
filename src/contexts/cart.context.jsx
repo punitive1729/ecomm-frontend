@@ -19,11 +19,10 @@ const addCartItem = (cartItems, productToAdd) => {
 const removeCartItem = (cartItems, cartItemToRemove) => {
   return cartItems.filter((cartItem) => {
     if (cartItem.id === cartItemToRemove.id) {
-      if (cartItem.quantity > 1) {
-        cartItem.quantity = cartItem.quantity - 1;
-        return cartItem;
-      }
-    } else return cartItem;
+      if (cartItem.quantity > 1) cartItem.quantity = cartItem.quantity - 1;
+      else return false;
+    }
+    return true;
   });
 };
 
@@ -31,7 +30,9 @@ const removeProduct = (cartItems, cartItemToRemove, price) => {
   return cartItems.filter((cartItem) => {
     if (cartItem.id === cartItemToRemove.id) {
       price.totalPrice = price.totalPrice - cartItem.quantity * cartItem.price;
-    } else return cartItem;
+      return false;
+    }
+    return true;
   });
 };
 
