@@ -4,21 +4,14 @@ import { CartDropDownContext } from '../contexts/cart.context';
 const CheckoutItem = ({ cartItem }) => {
   console.log('CheckoutItem', cartItem);
   const { name, imageUrl, price, quantity } = cartItem;
-  const {
-    addItemToCart,
-    totalCartItems,
-    removeItemFromCart,
-    setTotalCartItems,
-    removeOneProduct,
-  } = useContext(CartDropDownContext);
+  const { addItemToCart, removeItemFromCart, removeOneProduct } =
+    useContext(CartDropDownContext);
 
   const increaseQuantity = () => {
-    setTotalCartItems(totalCartItems + 1);
     addItemToCart(cartItem);
   };
 
   const decreaseQuantity = () => {
-    setTotalCartItems(totalCartItems - 1);
     removeItemFromCart(cartItem);
   };
 
