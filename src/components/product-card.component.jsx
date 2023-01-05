@@ -4,11 +4,9 @@ import { useContext } from 'react';
 import { CartDropDownContext } from '../contexts/cart.context';
 
 const ProductCard = ({ product }) => {
-  const { addItemToCart, setTotalCartItems, totalCartItems } =
-    useContext(CartDropDownContext);
+  const { addItemToCart } = useContext(CartDropDownContext);
   const { name, price, imageUrl } = product;
   const addToCartList = () => {
-    setTotalCartItems(totalCartItems + 1);
     addItemToCart(product);
   };
   return (
