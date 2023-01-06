@@ -10,7 +10,16 @@ import {
   onAuthStateChanged,
 } from 'firebase/auth';
 
-import { getFirestore, getDoc, setDoc, doc } from 'firebase/firestore';
+import {
+  getFirestore,
+  getDoc,
+  setDoc,
+  doc,
+  query,
+  getDocs,
+  collection,
+  writeBatch,
+} from 'firebase/firestore';
 
 // Initialize the app
 const googleProvider = new GoogleAuthProvider();
@@ -59,3 +68,34 @@ export const signOutUser = async () => await signOut(auth);
 
 export const authStateChangeListener = async (callback) =>
   onAuthStateChanged(auth, callback);
+
+// DB Operations
+// Storing docs in collection
+export const addCollectionAndDocuments = async (
+  collectionKey,
+  documentsToAdd
+) => {
+  // create a Ref with collectionKey in db
+  const collectionRef = collection(db, collectionKey);
+  const batch = writeBatch(db);
+  for (let i = 0; i < documentsToAdd.length; i++) {
+    const document = documentsToAdd[i];
+    const documentRef = doc(collectionRef, document.title);
+    batch.set(documentRef, document);
+  }
+
+  await batch.commit();
+  console.log('Products added\n');
+};
+
+export const getCategoriesAndDocuments = async () => {
+  const collectionRef = collection(db, 'categories');
+  const queryObject = query(collectionRef);
+
+  const querySnapshot = await getDocs(queryObject);
+  return querySnapshot.docs.reduce((result, doc) => {
+    const { title, items } = doc.data();
+    result[title.toLowerCase()] = items;
+    return result;
+  }, {});
+};
