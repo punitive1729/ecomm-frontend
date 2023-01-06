@@ -4,11 +4,9 @@ const CategoryItem = ({ category }) => {
   // props = {key, category}
   const { title, imageUrl } = category;
   const navigate = useNavigate();
-
   const goToShopItem = () => {
     navigate(`/shop/${title.toLowerCase()}`);
   };
-
   return (
     <div className='category-container' onClick={goToShopItem}>
       <div
