@@ -1,0 +1,15 @@
+.category-preview-title {
+  margin-left: 16px;
+  font-size: 30px;
+  margin-bottom: 20px;
+  font-weight: 300;
+}
+
+.products-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin-left: 15px;
+  padding-bottom: 50px;
+  column-gap: 10px;
+  row-gap: 50px;
+}
